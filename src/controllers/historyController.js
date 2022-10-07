@@ -2,19 +2,19 @@ import historyService from '../service/historyService';
 
 //History
 //create History
-let createHistory = async (req, res) => {
+exports.createHistory = async (req, res) => {
   await historyService.createRecordHistory(req.body);
   return res.send("create successfulty");
 };
 
 // getAll specialty
-let getAllHistory = async (req, res) => {
+exports.getAllHistory = async (req, res) => {
   let data = await historyService.getAllRecordHistory();
   return res.send(data);
 };
 
 //getById specialty
-let getByIdHistory = async (req, res) => {
+exports.getByIdHistory = async (req, res) => {
   try {
     let id = req.query.id;
     if (id) {
@@ -29,7 +29,7 @@ let getByIdHistory = async (req, res) => {
 };
 
 //delete specialty
-let deleteHistory = async (req, res) => {
+exports.deleteHistory = async (req, res) => {
   return new Promise(async (resolve, reject) => {
     try {
       let id = req.query.id;
@@ -44,10 +44,3 @@ let deleteHistory = async (req, res) => {
     }
   });
 };
-
-module.exports = {
-  createHistory: createHistory,
-  getAllHistory: getAllHistory,
-  deleteHistory: deleteHistory,
-  getByIdHistory: getByIdHistory
-}

@@ -2,7 +2,7 @@ import db from "../models/index";
 
 // Booking
 //create Booking
-let createRecordBooking = async (data) => {
+exports.createRecordBooking = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       await db.bookings.create({
@@ -21,7 +21,7 @@ let createRecordBooking = async (data) => {
 };
 
 //getAll Booking
-let getAllRecordBooking = () => {
+exports.getAllRecordBooking = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataBooking = await db.bookings.findAll({ raw: true });
@@ -33,7 +33,7 @@ let getAllRecordBooking = () => {
 };
 
 // getById Booking
-let getByIdRecordBooking = (dataid) => {
+exports.getByIdRecordBooking = (dataid) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataBooking = await db.bookings.findByPk(dataid, { raw: true });
@@ -50,7 +50,7 @@ let getByIdRecordBooking = (dataid) => {
 };
 
 //update Booking
-let updateRecordBooking = (data) => {
+exports.updateRecordBooking = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataBooking = await db.bookings.findByPk(data.id);
@@ -74,7 +74,7 @@ let updateRecordBooking = (data) => {
 };
 
 //delete Booking
-let deleteRecordBooking = async (id) => {
+exports.deleteRecordBooking = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
       let DataBooking = await db.bookings.findByPk(id);
@@ -86,12 +86,4 @@ let deleteRecordBooking = async (id) => {
       reject(error);
     }
   });
-};
-
-module.exports = {
-  createRecordBooking: createRecordBooking,
-  updateRecordBooking: updateRecordBooking,
-  getAllRecordBooking: getAllRecordBooking,
-  deleteRecordBooking: deleteRecordBooking,
-  getByIdRecordBooking: getByIdRecordBooking
 };

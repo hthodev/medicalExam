@@ -3,18 +3,18 @@ import scheduleService from '../service/scheduleService';
 //Schedule
 //create Schedule
 
-let createSchedule = async (req, res) => {
+exports.createSchedule = async (req, res) => {
   await scheduleService.createRecordSchedule(req.body);
   return res.send("create successfulty");
 };
 // getAll specialty
-let getAllSchedule = async (req, res) => {
+exports.getAllSchedule = async (req, res) => {
   let data = await scheduleService.getAllRecordSchedule();
   return res.send(data);
 };
 
 //getById specialty
-let getByIdSchedule = async (req, res) => {
+exports.getByIdSchedule = async (req, res) => {
   try {
     let id = req.query.id;
     if (id) {
@@ -29,14 +29,14 @@ let getByIdSchedule = async (req, res) => {
 };
 
 //update specialty
-let updateSchedule = async (req, res) => {
+exports.updateSchedule = async (req, res) => {
   let data = req.body;
   await scheduleService.updateRecordSchedule(data);
   return res.send("updated");
 };
 
 //delete specialty
-let deleteSchedule = async (req, res) => {
+exports.deleteSchedule = async (req, res) => {
   return new Promise(async (resolve, reject) => {
     try {
       let id = req.query.id;
@@ -51,11 +51,3 @@ let deleteSchedule = async (req, res) => {
     }
   });
 };
-
-module.exports = {
-  createSchedule: createSchedule,
-  updateSchedule: updateSchedule,
-  getAllSchedule: getAllSchedule,
-  deleteSchedule: deleteSchedule,
-  getByIdSchedule: getByIdSchedule
-}

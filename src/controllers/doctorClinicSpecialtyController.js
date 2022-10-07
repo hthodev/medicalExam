@@ -2,19 +2,19 @@ import doctorClinicSpecialtyService from '../service/doctorClinicSpecialtyServic
 
 //DoctorClinicSpecialty
 //create DoctorClinicSpecialty
-let createDoctorClinicSpecialty = async (req, res) => {
+exports.createDoctorClinicSpecialty = async (req, res) => {
   await doctorClinicSpecialtyService.createRecordDoctorClinicSpecialty(req.body);
   return res.send("create successfulty");
 };
 
 // getAll specialty
-let getAllDoctorClinicSpecialty = async (req, res) => {
+exports.getAllDoctorClinicSpecialty = async (req, res) => {
   let data = await doctorClinicSpecialtyService.getAllRecordDoctorClinicSpecialty();
   return res.send(data);
 };
 
 //getById specialty
-let getByIdDoctorClinicSpecialty = async (req, res) => {
+exports.getByIdDoctorClinicSpecialty = async (req, res) => {
   try {
     let id = req.query.id;
     if (id) {
@@ -29,14 +29,14 @@ let getByIdDoctorClinicSpecialty = async (req, res) => {
 };
 
 //update specialty
-let updateDoctorClinicSpecialty = async (req, res) => {
+exports.updateDoctorClinicSpecialty = async (req, res) => {
   let data = req.body;
   let result = await doctorClinicSpecialtyService.updateRecordDoctorClinicSpecialty(data);
   return res.send(result);
 };
 
 //delete specialty
-let deleteDoctorClinicSpecialty = async (req, res) => {
+exports.deleteDoctorClinicSpecialty = async (req, res) => {
   return new Promise(async (resolve, reject) => {
     try {
       let id = req.query.id;
@@ -51,11 +51,3 @@ let deleteDoctorClinicSpecialty = async (req, res) => {
     }
   });
 };
-
-module.exports = {
-  createDoctorClinicSpecialty: createDoctorClinicSpecialty,
-  updateDoctorClinicSpecialty: updateDoctorClinicSpecialty,
-  getAllDoctorClinicSpecialty: getAllDoctorClinicSpecialty,
-  deleteDoctorClinicSpecialty: deleteDoctorClinicSpecialty,
-  getByIdDoctorClinicSpecialty: getByIdDoctorClinicSpecialty
-}

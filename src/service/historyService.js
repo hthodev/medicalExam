@@ -2,7 +2,7 @@ import db from "../models/index";
 
 // History
 //create History
-let createRecordHistory = async (data) => {
+exports.createRecordHistory = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       await db.histories.create({
@@ -20,7 +20,7 @@ let createRecordHistory = async (data) => {
 };
 
 //getAll History
-let getAllRecordHistory = () => {
+exports.getAllRecordHistory = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataHistory = await db.histories.findAll({ raw: true });
@@ -32,7 +32,7 @@ let getAllRecordHistory = () => {
 };
 
 // getById History
-let getByIdRecordHistory = (dataid) => {
+exports.getByIdRecordHistory = (dataid) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataHistory = await db.histories.findByPk(dataid, { raw: true });
@@ -49,7 +49,7 @@ let getByIdRecordHistory = (dataid) => {
 };
 
 //delete History
-let deleteRecordHistory = async (id) => {
+exports.deleteRecordHistory = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataHistory = await db.histories.findByPk(id);
@@ -62,10 +62,3 @@ let deleteRecordHistory = async (id) => {
     }
   });
 };
-
-module.exports = {
-  createRecordHistory: createRecordHistory,
-  getAllRecordHistory: getAllRecordHistory,
-  deleteRecordHistory: deleteRecordHistory,
-  getByIdRecordHistory: getByIdRecordHistory
-}

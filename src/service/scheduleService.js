@@ -2,7 +2,7 @@ import db from "../models/index";
 
 // schedule
 //create schedule
-let createRecordSchedule = async (data) => {
+exports.createRecordSchedule = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       await db.schedules.create({
@@ -20,7 +20,7 @@ let createRecordSchedule = async (data) => {
 };
 
 //getAll Schedule
-let getAllRecordSchedule = () => {
+exports.getAllRecordSchedule = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataScl = await db.schedules.findAll({ raw: true });
@@ -32,7 +32,7 @@ let getAllRecordSchedule = () => {
 };
 
 // getById Schedule
-let getByIdRecordSchedule = (dataid) => {
+exports.getByIdRecordSchedule = (dataid) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataSct = await db.schedules.findByPk(dataid, { raw: true });
@@ -49,7 +49,7 @@ let getByIdRecordSchedule = (dataid) => {
 };
 
 //update Schedule
-let updateRecordSchedule = (data) => {
+exports.updateRecordSchedule = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataSct = await db.schedules.findByPk(data.id);
@@ -73,7 +73,7 @@ let updateRecordSchedule = (data) => {
 };
 
 //delete Schedule
-let deleteRecordSchedule = async (id) => {
+exports.deleteRecordSchedule = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
       let DataSct = await db.schedules.findByPk(id);
@@ -86,11 +86,3 @@ let deleteRecordSchedule = async (id) => {
     }
   });
 };
-
-module.exports = {
-  createRecordSchedule: createRecordSchedule,
-  updateRecordSchedule: updateRecordSchedule,
-  getAllRecordSchedule: getAllRecordSchedule,
-  deleteRecordSchedule: deleteRecordSchedule,
-  getByIdRecordSchedule: getByIdRecordSchedule
-}

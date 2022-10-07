@@ -1,0 +1,14 @@
+POST http://localhost:3000/api/v1/registor
+Content-Type: application/json
+
+{
+  "firstName": "Nguyen",
+  "lastName": "Dat",
+  "email": "nvdatdev@gmail.com",
+  "phone": "0327618979",
+  "address": "Da Nang",
+  "password": "123123",
+  "gender": true
+}
+
+###

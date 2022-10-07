@@ -1,6 +1,6 @@
 import db from "../models/index";
 
-let getHomePage = async (req, res) => {
+exports.getHomePage = async (req, res) => {
   try {
     let data = await db.user.findAll();
     return res.render("homepage.ejs", {
@@ -9,8 +9,4 @@ let getHomePage = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-};
-
-module.exports = {
-  getHomePage: getHomePage
 };
