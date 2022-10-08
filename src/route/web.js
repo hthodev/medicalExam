@@ -8,13 +8,14 @@ import doctorClinicSpecialtyController from "../controllers/doctorClinicSpecialt
 import clinicController from "../controllers/clinicController";
 import bookingController from "../controllers/bookingController";
 import { checkLogin, checkAdmin } from "../middleware/authorization";
+import { userDataValidate } from "../validation/userValidation";
 
 let router = express.Router();
 
 let initWebRoutes = (app) => {
   //user
   //create
-  router.post("/register", userController.createUser);
+  router.post("/register", userDataValidate, userController.createUser);
   //login
   router.post("/login", userController.loginUser);
   //getAllUser
