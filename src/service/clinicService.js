@@ -2,7 +2,7 @@ import db from "../models/index";
 
 // Clinic
 //create Clinic
-let createRecordClinic = async (data) => {
+exports.createRecordClinic = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       await db.clinics.create({
@@ -20,7 +20,7 @@ let createRecordClinic = async (data) => {
 };
 
 //getAll Clinic
-let getAllRecordClinic = () => {
+exports.getAllRecordClinic = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataClinic = await db.clinics.findAll({ raw: true });
@@ -32,7 +32,7 @@ let getAllRecordClinic = () => {
 };
 
 // getById Clinic
-let getByIdRecordClinic = (dataid) => {
+exports.getByIdRecordClinic = (dataid) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataClinic = await db.clinics.findByPk(dataid, { raw: true });
@@ -49,7 +49,7 @@ let getByIdRecordClinic = (dataid) => {
 };
 
 //update Clinic
-let updateRecordClinic = (data) => {
+exports.updateRecordClinic = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataClinic = await db.clinics.findByPk(data.id);
@@ -72,7 +72,7 @@ let updateRecordClinic = (data) => {
 };
 
 //delete Clinic
-let deleteRecordClinic = async (id) => {
+exports.deleteRecordClinic = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
       let DataSct = await db.clinics.findByPk(id);
@@ -85,11 +85,3 @@ let deleteRecordClinic = async (id) => {
     }
   });
 };
-
-module.exports = {
-  createRecordClinic: createRecordClinic,
-  updateRecordClinic: updateRecordClinic,
-  getAllRecordClinic: getAllRecordClinic,
-  deleteRecordClinic: deleteRecordClinic,
-  getByIdRecordClinic: getByIdRecordClinic
-}

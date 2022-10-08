@@ -1,17 +1,17 @@
 import bookingService from '../service/bookingService';
 
-let createBooking = async (req, res) => {
+exports.createBooking = async (req, res) => {
   await bookingService.createRecordBooking(req.body);
   return res.send("create successfulty");
 };
 // getAll specialty
-let getAllBooking = async (req, res) => {
+exports.getAllBooking = async (req, res) => {
   let data = await bookingService.getAllRecordBooking();
   return res.send(data);
 };
 
 //getById specialty
-let getByIdBooking = async (req, res) => {
+exports.getByIdBooking = async (req, res) => {
   try {
     let id = req.query.id;
     if (id) {
@@ -26,14 +26,14 @@ let getByIdBooking = async (req, res) => {
 };
 
 //update specialty
-let updateBooking = async (req, res) => {
+exports.updateBooking = async (req, res) => {
   let data = req.body;
   await bookingService.updateRecordBooking(data);
   return res.send("updated");
 };
 
 //delete specialty
-let deleteBooking = async (req, res) => {
+exports.deleteBooking = async (req, res) => {
   return new Promise(async (resolve, reject) => {
     try {
       let id = req.query.id;
@@ -47,12 +47,4 @@ let deleteBooking = async (req, res) => {
       reject(error);
     }
   });
-};
-
-module.exports = {
-  createBooking: createBooking,
-  updateBooking: updateBooking,
-  getAllBooking: getAllBooking,
-  deleteBooking: deleteBooking,
-  getByIdBooking: getByIdBooking
 };

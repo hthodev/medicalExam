@@ -17,7 +17,7 @@ let hashPassword = (password) => {
 
 /* user */
 // create user. check email invaid
-let createRecordUser = (data) => {
+exports.createRecordUser = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const user = await db.user.findOrCreate({
@@ -61,7 +61,7 @@ let createRecordUser = (data) => {
 };
 
 //login user
-let LoginRecordUser = (data) => {
+exports.LoginRecordUser = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const user = await db.user.findOne({
@@ -101,7 +101,7 @@ let LoginRecordUser = (data) => {
   });
 };
 
-let getAllRecordUser = () => {
+exports.getAllRecordUser = () => {
   try {
     return new Promise(async (resolve, reject) => {
       resolve(await db.user.findAll());
@@ -109,10 +109,4 @@ let getAllRecordUser = () => {
   } catch (error) {
     reject(error);
   }
-};
-
-module.exports = {
-  createRecordUser: createRecordUser,
-  LoginRecordUser: LoginRecordUser,
-  getAllRecordUser: getAllRecordUser
 };

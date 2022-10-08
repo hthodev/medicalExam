@@ -1,7 +1,7 @@
 import db from "../models/index";
 
 // create specialty
-let createRecordSpecialty = async (data) => {
+exports.createRecordSpecialty = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       await db.specialties.create({
@@ -17,7 +17,7 @@ let createRecordSpecialty = async (data) => {
 };
 
 //getAll specialty
-let getAllRecordSpecialty = () => {
+exports.getAllRecordSpecialty = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataSct = await db.specialties.findAll({ raw: true });
@@ -29,7 +29,7 @@ let getAllRecordSpecialty = () => {
 };
 
 // getById specialty
-let getByIdRecordSpecialty = (dataid) => {
+exports.getByIdRecordSpecialty = (dataid) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataSct = await db.specialties.findByPk(dataid, { raw: true });
@@ -46,7 +46,7 @@ let getByIdRecordSpecialty = (dataid) => {
 };
 
 //update specialty
-let updateRecordSpecialty = (data) => {
+exports.updateRecordSpecialty = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataSct = await db.specialties.findByPk(data.id);
@@ -68,7 +68,7 @@ let updateRecordSpecialty = (data) => {
 };
 
 //delete Specialty
-let deleteRecordSpecialty = async (id) => {
+exports.deleteRecordSpecialty = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
       let DataSct = await db.specialties.findByPk(id);
@@ -81,11 +81,3 @@ let deleteRecordSpecialty = async (id) => {
     }
   });
 };
-
-module.exports = {
-  createRecordSpecialty: createRecordSpecialty,
-  updateRecordSpecialty: updateRecordSpecialty,
-  getAllRecordSpecialty: getAllRecordSpecialty,
-  deleteRecordSpecialty: deleteRecordSpecialty,
-  getByIdRecordSpecialty: getByIdRecordSpecialty
-}

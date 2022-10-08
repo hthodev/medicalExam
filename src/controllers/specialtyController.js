@@ -2,18 +2,18 @@ import specialtyService from '../service/specialtyService';
 
 //create specialty
 
-let createSpecialty = async (req, res) => {
+exports.createSpecialty = async (req, res) => {
   await specialtyService.createRecordSpecialty(req.body);
   return res.send("create successfulty");
 };
 // getAll specialty
-let getAllSpecialty = async (req, res) => {
+exports.getAllSpecialty = async (req, res) => {
   let data = await specialtyService.getAllRecordSpecialty();
   return res.send(data);
 };
 
 //getById specialty
-let getByIdSpecialty = async (req, res) => {
+exports.getByIdSpecialty = async (req, res) => {
   try {
     let id = req.query.id;
     if (id) {
@@ -28,14 +28,14 @@ let getByIdSpecialty = async (req, res) => {
 };
 
 //update specialty
-let updateSpecialty = async (req, res) => {
+exports.updateSpecialty = async (req, res) => {
   let data = req.body;
   await specialtyService.updateRecordSpecialty(data);
   return res.send("updated");
 };
 
 //delete specialty
-let deleteSpecialty = async (req, res) => {
+exports.deleteSpecialty = async (req, res) => {
   return new Promise(async (resolve, reject) => {
     try {
       let id = req.query.id;
@@ -50,11 +50,3 @@ let deleteSpecialty = async (req, res) => {
     }
   });
 };
-
-module.exports = {
-  createSpecialty: createSpecialty,
-  updateSpecialty: updateSpecialty,
-  getAllSpecialty: getAllSpecialty,
-  deleteSpecialty: deleteSpecialty,
-  getByIdSpecialty: getByIdSpecialty
-}

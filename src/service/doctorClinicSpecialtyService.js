@@ -2,7 +2,7 @@ import db from "../models/index";
 
 // doctorClinicSpecialty
 //create doctorClinicSpecialty
-let createRecordDoctorClinicSpecialty = async (data) => {
+exports.createRecordDoctorClinicSpecialty = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       await db.doctorClinicSpecialties.create({
@@ -19,7 +19,7 @@ let createRecordDoctorClinicSpecialty = async (data) => {
 };
 
 //getAll doctorClinicSpecialty
-let getAllRecordDoctorClinicSpecialty = () => {
+exports.getAllRecordDoctorClinicSpecialty = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataDCS = await db.doctorClinicSpecialties.findAll({ raw: true });
@@ -31,7 +31,7 @@ let getAllRecordDoctorClinicSpecialty = () => {
 };
 
 // getById doctorClinicSpecialty
-let getByIdRecordDoctorClinicSpecialty = (dataid) => {
+exports.getByIdRecordDoctorClinicSpecialty = (dataid) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataDCS = await db.doctorClinicSpecialties.findByPk(dataid, {
@@ -50,7 +50,7 @@ let getByIdRecordDoctorClinicSpecialty = (dataid) => {
 };
 
 //update doctorClinicSpecialty
-let updateRecordDoctorClinicSpecialty = (data) => {
+exports.updateRecordDoctorClinicSpecialty = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataDCS = await db.doctorClinicSpecialties.findByPk(data.id);
@@ -72,7 +72,7 @@ let updateRecordDoctorClinicSpecialty = (data) => {
 };
 
 //delete doctorClinicSpecialty
-let deleteRecordDoctorClinicSpecialty = async (id) => {
+exports.deleteRecordDoctorClinicSpecialty = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
       let dataDCS = await db.doctorClinicSpecialties.findByPk(id);
@@ -85,11 +85,3 @@ let deleteRecordDoctorClinicSpecialty = async (id) => {
     }
   });
 };
-
-module.exports = {
-  createRecordDoctorClinicSpecialty: createRecordDoctorClinicSpecialty,
-  updateRecordDoctorClinicSpecialty: updateRecordDoctorClinicSpecialty,
-  getAllRecordDoctorClinicSpecialty: getAllRecordDoctorClinicSpecialty,
-  deleteRecordDoctorClinicSpecialty: deleteRecordDoctorClinicSpecialty,
-  getByIdRecordDoctorClinicSpecialty: getByIdRecordDoctorClinicSpecialty
-}
