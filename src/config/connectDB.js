@@ -12,7 +12,7 @@ const Sequelize = require("sequelize");
 
 // Option 3: Passing parameters separately (other dialects)
 let password = process.env.PASSWORD || null;
-const sequelize = new Sequelize("medicalExam", "root", password, {
+const sequelize = new Sequelize("medicalExam", "thientho", password, {
   host: "localhost",
   dialect: "mysql",
   logging: false,

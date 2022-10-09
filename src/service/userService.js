@@ -61,15 +61,14 @@ exports.createRecordUser = (data) => {
 };
 
 //login user
-exports.LoginRecordUser = (data) => {
+exports.LoginRecordUser = (email, password) => {
   return new Promise(async (resolve, reject) => {
     try {
       const user = await db.user.findOne({
-        where: { email: data.email },
+        where: { email: email },
         raw: true,
       });
-      const isChecked =
-        user && bcrypt.compareSync(data.password, user.password);
+      const isChecked = user && bcrypt.compareSync(password, user.password);
       const token = isChecked
         ? jwt.sign(
             {
@@ -87,14 +86,26 @@ exports.LoginRecordUser = (data) => {
           )
         : null;
 
-      resolve({
-        massage: token
-          ? "login successfully"
-          : user
-          ? "password wrong"
-          : "email isn't registered",
-        acess_token: token ? `Baerer ${token}` : token,
-      });
+      if (token) {
+        resolve({
+          errCode: 0,
+          message: "login successfully",
+          acess_token: token ? `Baerer ${token}` : token,
+        });
+      } else {
+        resolve({
+          errCode: 1,
+          message: user ? "password wrong" : "email isn't registered",
+        });
+      }
+      // resolve({
+      //   message: token
+      //     ? "login successfully"
+      //     : user
+      //     ? "password wrong"
+      //     : "email isn't registered",
+      //   acess_token: token ? `Baerer ${token}` : token,
+      // });
     } catch (error) {
       reject(error);
     }

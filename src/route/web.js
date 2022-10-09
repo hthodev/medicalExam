@@ -22,64 +22,139 @@ let initWebRoutes = (app) => {
   router.get("/get-allUser", checkLogin, checkAdmin, userController.getAllUser);
 
   //specially
-  router.post("/create-specialty", checkLogin, checkAdmin, specialtyController.createSpecialty);
+  router.post(
+    "/create-specialty",
+    checkLogin,
+    checkAdmin,
+    specialtyController.createSpecialty
+  );
   //update
-  router.post("/update-specialty", checkLogin, checkAdmin, specialtyController.updateSpecialty);
+  router.post(
+    "/update-specialty",
+    checkLogin,
+    checkAdmin,
+    specialtyController.updateSpecialty
+  );
   //getAll
-  router.get("/getAll-specialty", checkLogin, checkAdmin, specialtyController.getAllSpecialty);
+  router.get(
+    "/getAll-specialty",
+    checkLogin,
+    checkAdmin,
+    specialtyController.getAllSpecialty
+  );
   //delete
-  router.get("/remove-specialty", checkLogin, checkAdmin, specialtyController.deleteSpecialty);
+  router.get(
+    "/remove-specialty",
+    checkLogin,
+    checkAdmin,
+    specialtyController.deleteSpecialty
+  );
   //getByID
-  router.get("/getById-specialty", checkLogin, checkAdmin, specialtyController.getByIdSpecialty);
+  router.get(
+    "/getById-specialty",
+    checkLogin,
+    checkAdmin,
+    specialtyController.getByIdSpecialty
+  );
 
   //Schedule
-  router.post("/create-schedule", checkLogin, checkAdmin, scheduleController.createSchedule);
+  router.post(
+    "/create-schedule",
+    checkLogin,
+    checkAdmin,
+    scheduleController.createSchedule
+  );
   //updatescheduleSchedule
-  router.post("/update-schedule", checkLogin, checkAdmin, scheduleController.updateSchedule);
+  router.post(
+    "/update-schedule",
+    checkLogin,
+    checkAdmin,
+    scheduleController.updateSchedule
+  );
   //getAllscheduleSchedule
-  router.get("/getAll-schedule", checkLogin, checkAdmin, scheduleController.getAllSchedule);
+  router.get(
+    "/getAll-schedule",
+    checkLogin,
+    checkAdmin,
+    scheduleController.getAllSchedule
+  );
   //deletescheduleSchedule
-  router.get("/remove-schedule", checkLogin, checkAdmin, scheduleController.deleteSchedule);
+  router.get(
+    "/remove-schedule",
+    checkLogin,
+    checkAdmin,
+    scheduleController.deleteSchedule
+  );
   //getByIDschedule
-  router.get("/getById-schedule", checkLogin, checkAdmin, scheduleController.getByIdSchedule);
+  router.get(
+    "/getById-schedule",
+    checkLogin,
+    checkAdmin,
+    scheduleController.getByIdSchedule
+  );
 
   //History
-  router.post("/create-history", checkLogin, checkAdmin, historyController.createHistory);
+  router.post(
+    "/create-history",
+    checkLogin,
+    checkAdmin,
+    historyController.createHistory
+  );
   //getAllHistoryHistory
-  router.get("/getAll-history",checkLogin, checkAdmin, historyController.getAllHistory);
+  router.get(
+    "/getAll-history",
+    checkLogin,
+    checkAdmin,
+    historyController.getAllHistory
+  );
   //deleteHistoryHistory
-  router.get("/remove-history", checkLogin, checkAdmin, historyController.deleteHistory);
+  router.get(
+    "/remove-history",
+    checkLogin,
+    checkAdmin,
+    historyController.deleteHistory
+  );
   //getByIDHistory
-  router.get("/getById-history", checkLogin, checkAdmin, historyController.getByIdHistory);
+  router.get(
+    "/getById-history",
+    checkLogin,
+    checkAdmin,
+    historyController.getByIdHistory
+  );
 
   //doctor-clinic-specialty
   router.post(
     "/create-doctor-clinic-specialty",
-    checkLogin, checkAdmin,
+    checkLogin,
+    checkAdmin,
     doctorClinicSpecialtyController.createDoctorClinicSpecialty
   );
   //updatedoctor-clinic-specialtydoctor-clinic-specialty
   router.post(
     "/update-doctor-clinic-specialty",
-    checkLogin, checkAdmin,
+    checkLogin,
+    checkAdmin,
     doctorClinicSpecialtyController.updateDoctorClinicSpecialty
   );
   //getAlldoctor-clinic-specialtydoctor-clinic-specialty
   router.get(
     "/getAll-doctor-clinic-specialty",
-    checkLogin, checkAdmin,
+    checkLogin,
+    checkAdmin,
     doctorClinicSpecialtyController.getAllDoctorClinicSpecialty
   );
   //deletedoctor-clinic-specialtydoctor-clinic-specialty
   router.get(
     "/remove-doctor-clinic-specialty",
-    checkLogin, checkAdmin,
+    checkLogin,
+    checkAdmin,
     doctorClinicSpecialtyController.deleteDoctorClinicSpecialty
   );
   //getByIDdoctor-clinic-specialty
   router.get(
     "/getById-doctor-clinic-specialty",
-    checkLogin, checkAdmin,
+    checkLogin,
+    checkAdmin,
     doctorClinicSpecialtyController.getByIdDoctorClinicSpecialty
   );
 
@@ -99,11 +174,26 @@ let initWebRoutes = (app) => {
   //updateBookingBooking
   router.post("/update-booking", checkLogin, bookingController.updateBooking);
   //getAllBookingBooking
-  router.get("/getAll-booking", checkLogin, checkAdmin, bookingController.getAllBooking);
+  router.get(
+    "/getAll-booking",
+    checkLogin,
+    checkAdmin,
+    bookingController.getAllBooking
+  );
   //deleteBookingBooking
-  router.get("/remove-booking", checkLogin, checkAdmin, bookingController.deleteBooking);
+  router.get(
+    "/remove-booking",
+    checkLogin,
+    checkAdmin,
+    bookingController.deleteBooking
+  );
   //getByIDBooking
-  router.get("/getById-booking", checkLogin, checkAdmin, bookingController.getByIdBooking);
+  router.get(
+    "/getById-booking",
+    checkLogin,
+    checkAdmin,
+    bookingController.getByIdBooking
+  );
 
   //rest api
   return app.use("/api", router);
