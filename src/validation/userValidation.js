@@ -35,7 +35,9 @@ const userDataValidate = [
         return true;
       }
     }),
-  body("gender").exists({ checkFalsy: true }).withMessage("Gender is required"),
+  body("gender")
+    .exists({ checkFalsy: true })
+    .withMessage("Gender is required"),
 ];
 
 module.exports = { userDataValidate };
