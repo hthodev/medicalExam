@@ -1,14 +1,7 @@
 const { body } = require("express-validator");
 
-const userDataValidate = [
+const updateDataValidate = [
   body("email").optional().isEmail().withMessage("Provide valid email"),
-  body("password")
-    .exists()
-    .withMessage("Password is required")
-    .isString()
-    .withMessage("Password should be string")
-    .isLength({ min: 5 })
-    .withMessage("Password should be at least 5 characters"),
   body("firstName")
     .exists({ checkFalsy: true })
     .withMessage("First name is required")
@@ -38,4 +31,4 @@ const userDataValidate = [
   body("gender").exists({ checkFalsy: true }).withMessage("Gender is required"),
 ];
 
-module.exports = { userDataValidate };
+module.exports = { updateDataValidate };

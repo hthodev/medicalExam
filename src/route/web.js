@@ -9,17 +9,32 @@ import clinicController from "../controllers/clinicController";
 import bookingController from "../controllers/bookingController";
 import { checkLogin, checkAdmin } from "../middleware/authorization";
 import { userDataValidate } from "../validation/userValidation";
+import { updateDataValidate } from "../validation/updateValidator";
 
 let router = express.Router();
 
 let initWebRoutes = (app) => {
   //user
-  //create
+  //create for customer
   router.post("/register", userDataValidate, userController.createUser);
+  //create for doctor
+  router.post(
+    "/register-doctor",
+    userDataValidate,
+    userController.createDoctor
+  );
   //login
   router.post("/login", userController.loginUser);
   //getAllUser
-  router.get("/get-allUser", checkLogin, checkAdmin, userController.getAllUser);
+  router.get("/get-user", userController.getUser);
+  //DeleteUser
+  router.delete("/remove-account", userController.deleteAccount);
+  //updateUserDoctor
+  router.put(
+    "/update-account",
+    updateDataValidate,
+    userController.updateAccount
+  );
 
   //specially
   router.post(
