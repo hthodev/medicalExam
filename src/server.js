@@ -22,4 +22,4 @@ initWebRoutes(app);
 
 connectDB(app);
 
-module.exports = app;
+export default app;
