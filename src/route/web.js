@@ -1,6 +1,7 @@
 import express from "express";
 import homeController from "../controllers/homeController";
 import userController from "../controllers/userController";
+import allCodeController from "../controllers/allCodeController";
 import specialtyController from "../controllers/specialtyController";
 import scheduleController from "../controllers/scheduleController";
 import historyController from "../controllers/historyController";
@@ -10,19 +11,13 @@ import bookingController from "../controllers/bookingController";
 import { checkLogin, checkAdmin } from "../middleware/authorization";
 import { userDataValidate } from "../validation/userValidation";
 import { updateDataValidate } from "../validation/updateValidator";
-
+import doctorController from "../controllers/doctorController";
 let router = express.Router();
 
 let initWebRoutes = (app) => {
   //user
   //create for customer
   router.post("/register", userDataValidate, userController.createUser);
-  //create for doctor
-  router.post(
-    "/register-doctor",
-    userDataValidate,
-    userController.createDoctor
-  );
   //login
   router.post("/login", userController.loginUser);
   //getAllUser
@@ -35,6 +30,21 @@ let initWebRoutes = (app) => {
     updateDataValidate,
     userController.updateAccount
   );
+
+  //create for doctor
+  router.post(
+    "/register-doctor",
+    userDataValidate,
+    doctorController.createDoctor
+  );
+  //get All Doctor
+  router.get("/getAll-doctor", doctorController.getAllDoctor);
+  //get Top Doctor
+  router.get("/getTop-doctor", doctorController.getTopDoctor);
+
+  //allcode
+
+  router.get("/getAll-allCode", allCodeController.getAllCode);
 
   //specially
   router.post(
@@ -209,6 +219,8 @@ let initWebRoutes = (app) => {
     checkAdmin,
     bookingController.getByIdBooking
   );
+
+  //DOCTOR
 
   //rest api
   return app.use("/api", router);

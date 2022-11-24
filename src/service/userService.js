@@ -72,62 +72,6 @@ exports.createRecordUser = (data) => {
   });
 };
 
-//create doctor
-exports.createRecordDoctor = (data) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const user = await db.user.findOrCreate({
-        where: { email: data.email },
-        defaults: {
-          email: data.email,
-          password: await hashPassword(data.password),
-          firstName: data.firstName,
-          lastName: data.lastName,
-          address: data.address,
-          phone: data.phone,
-          image: data.STRING,
-          gender: data.gender === "1" ? true : false,
-          roleid: 1,
-        },
-      });
-      const token = user[1]
-        ? jwt.sign(
-            {
-              email: user.email,
-              firstName: user.firstName,
-              lastName: user.lastName,
-              address: user.address,
-              phone: user.phone,
-              image: user.image,
-              gender: user.gender,
-              roleid: user.roleid,
-            },
-            process.env.JWT_SECRET,
-            { expiresIn: "30m" }
-          )
-        : null;
-
-      if (token) {
-        resolve({
-          errCode: 0,
-          message: "registry successfully",
-          acess_token: token ? `Baerer ${token}` : token,
-        });
-      } else {
-        resolve({
-          errCode: 1,
-          message: user[1] ? "" : "email invaild",
-        });
-      }
-    } catch (error) {
-      reject({
-        errCode: 1,
-        error,
-      });
-    }
-  });
-};
-
 //login user
 exports.LoginRecordUser = (email, password) => {
   return new Promise(async (resolve, reject) => {
@@ -141,6 +85,8 @@ exports.LoginRecordUser = (email, password) => {
         ? jwt.sign(
             {
               email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
               roleid: user.roleid,
             },
             process.env.JWT_SECRET,
@@ -160,14 +106,6 @@ exports.LoginRecordUser = (email, password) => {
           message: user ? "password wrong" : "email isn't registered",
         });
       }
-      // resolve({
-      //   message: token
-      //     ? "login successfully"
-      //     : user
-      //     ? "password wrong"
-      //     : "email isn't registered",
-      //   acess_token: token ? `Baerer ${token}` : token,
-      // });
     } catch (error) {
       reject(error);
     }
