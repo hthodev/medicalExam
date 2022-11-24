@@ -7,6 +7,7 @@ import cors from "cors";
 
 require("dotenv").config();
 let app = express();
+let port = process.env.PORT || 3000;
 app.use(cors({ origin: true }));
 //config app
 
@@ -22,8 +23,8 @@ initWebRoutes(app);
 
 connectDB(app);
 
-let port = process.env.PORT || 8080;
-
 app.listen(port, () => {
   console.log("Nodejs running on the port " + port);
 });
+
+export default app;
