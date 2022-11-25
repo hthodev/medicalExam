@@ -11,9 +11,9 @@
     "timezone":"+07:00"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "username": "thientho",
+    "password": "123123",
+    "database": "medicalExam",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
