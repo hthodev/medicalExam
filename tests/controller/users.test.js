@@ -91,13 +91,58 @@ describe('Register & Login user', () => {
     expect(body.message.message).equal('login successfully')
     expect(status).equal(200);
   })
+})
+
+describe('Get all users', () => {
+  before(async() => {
+    await db.user.bulkCreate([{
+      firstName: "Nguyen",
+      lastName: "Dat",
+      email: "nvdatdev1@gmail.com",
+      phone: "0327618979",
+      address: "Da Nang",
+      password: '123123',
+      gender: '1'
+    },{
+      firstName: "Nguyen",
+      lastName: "Dat",
+      email: "nvdatdev2@gmail.com",
+      phone: "0327618979",
+      address: "Da Nang",
+      password: '123123',
+      gender: '1'
+    },{
+      firstName: "Nguyen",
+      lastName: "Dat",
+      email: "nvdatdev3@gmail.com",
+      phone: "0327618979",
+      address: "Da Nang",
+      password: '123123',
+      gender: '1'
+    },{
+      firstName: "Nguyen",
+      lastName: "Dat",
+      email: "nvdatdev4@gmail.com",
+      phone: "0327618979",
+      address: "Da Nang",
+      password: '123123',
+      gender: '1'
+    }])
+  })
+  after(async () => {
+    await db.user.destroy({
+      truncate: true,
+    });
+  })
 
   it('Should get list users successfully', async () => {
     const { body, status } = await request(baseurl)
                                       .get('get-user')
-    expect(body.result.length).equal(2);
+    expect(body.result.length).equal(4);
     expect(body.result[0].email).equal('nvdatdev1@gmail.com');
-    expect(body.result[1].email).equal('nvdatdev@gmail.com');
+    expect(body.result[1].email).equal('nvdatdev2@gmail.com');
+    expect(body.result[2].email).equal('nvdatdev3@gmail.com');
+    expect(body.result[3].email).equal('nvdatdev4@gmail.com');
     expect(status).equal(200);
   })
 })
