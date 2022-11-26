@@ -1,4 +1,4 @@
-import doctorClinicSpecialtyService from '../service/doctorClinicSpecialtyService';
+const doctorClinicSpecialtyService = require('../service/doctorClinicSpecialtyService');
 
 //DoctorClinicSpecialty
 //create DoctorClinicSpecialty

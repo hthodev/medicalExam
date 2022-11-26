@@ -1,4 +1,4 @@
-import bookingService from '../service/bookingService';
+const bookingService = require('../service/bookingService');
 
 exports.createBooking = async (req, res) => {
   await bookingService.createRecordBooking(req.body);

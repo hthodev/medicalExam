@@ -1,5 +1,5 @@
-import { validationResult } from "express-validator";
-import userService from "../service/userService";
+const { validationResult } = require("express-validator");
+const userService = require("../service/userService");
 
 exports.createUser = async (req, res) => {
   const errors = validationResult(req);

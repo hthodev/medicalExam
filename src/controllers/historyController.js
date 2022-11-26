@@ -1,4 +1,4 @@
-import historyService from '../service/historyService';
+const historyService = require('../service/historyService');
 
 //History
 //create History

@@ -1,15 +1,15 @@
-import express from "express";
-import homeController from "../controllers/homeController";
-import userController from "../controllers/userController";
-import specialtyController from "../controllers/specialtyController";
-import scheduleController from "../controllers/scheduleController";
-import historyController from "../controllers/historyController";
-import doctorClinicSpecialtyController from "../controllers/doctorClinicSpecialtyController";
-import clinicController from "../controllers/clinicController";
-import bookingController from "../controllers/bookingController";
-import { checkLogin, checkAdmin } from "../middleware/authorization";
-import { userDataValidate } from "../validation/userValidation";
-import { updateDataValidate } from "../validation/updateValidator";
+const express = require("express");
+const homeController = require("../controllers/homeController");
+const userController = require("../controllers/userController");
+const specialtyController = require("../controllers/specialtyController");
+const scheduleController = require("../controllers/scheduleController");
+const historyController = require("../controllers/historyController");
+const doctorClinicSpecialtyController = require("../controllers/doctorClinicSpecialtyController");
+const clinicController = require("../controllers/clinicController");
+const bookingController = require("../controllers/bookingController");
+const { checkLogin, checkAdmin } = require("../middleware/authorization");
+const { userDataValidate } = require("../validation/userValidation");
+const { updateDataValidate } = require("../validation/updateValidator");
 
 let router = express.Router();
 

@@ -1,4 +1,4 @@
-import clinicService from '../service/clinicService';
+const clinicService = require('../service/clinicService');
 
 //Clinic
 //create Clinic

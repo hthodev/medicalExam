@@ -4,7 +4,10 @@
   "description": "backend nodejs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test mocha ./tests/*",
+    "pretest": "cross-env NODE_ENV=test npm run db:reset",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --seeders-path ./seeders/test",
+    "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
     "start": "nodemon --exec npx babel-node src/server.js"
   },
   "repository": {
@@ -40,7 +43,10 @@
     "@babel/node": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "babel-core": "^7.0.0-bridge.0",
+    "chai": "^4.3.7",
+    "mocha": "^10.1.0",
     "nodemon": "^2.0.7",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^6.3.1"
   }
 }
