@@ -1,4 +1,4 @@
-import scheduleService from '../service/scheduleService';
+const scheduleService = require('../service/scheduleService');
 
 //Schedule
 //create Schedule

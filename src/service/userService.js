@@ -1,6 +1,6 @@
-import bcrypt, { hash } from "bcryptjs";
-import db from "../models/index";
-import jwt from "jsonwebtoken";
+const bcrypt = require("bcryptjs");
+const db = require("../models/index");
+const jwt = require("jsonwebtoken");
 
 const salt = bcrypt.genSaltSync(10);
 

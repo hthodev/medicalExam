@@ -1,4 +1,5 @@
-import exports from "express";
+const express = require("express");
+const { exports } = express;
 
 let configViewEngine = (app) => {
     app.use(exports.static("./src/public"))

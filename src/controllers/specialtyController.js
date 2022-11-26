@@ -1,4 +1,4 @@
-import specialtyService from '../service/specialtyService';
+const specialtyService = require('../service/specialtyService');
 
 //create specialty
 
