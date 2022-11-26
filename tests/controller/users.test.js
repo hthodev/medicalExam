@@ -2,44 +2,31 @@ const chai = require('chai');
 const request = require('supertest');
 const { server } = require('../../src/server');
 const db = require('../../src/models/index');
-const bcrypt = require("bcryptjs");
 
 const { expect } = chai;
-const salt = bcrypt.genSaltSync(10);
-
-let hashPassword = (password) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let hash = await bcrypt.hashSync(password, salt);
-      resolve(hash);
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
 
 describe('Register & Login user', () => {
   before(async() => {
     await db.user.create({
       firstName: "Nguyen",
       lastName: "Dat",
-      email: "nvdatdev@gmail.com",
+      email: "nvdatdev1@gmail.com",
       phone: "0327618979",
       address: "Da Nang",
-      password: await hashPassword('123123'),
+      password: '123123',
       gender: '1'
     })
   })
   after(async () => {
     await db.user.destroy({
-      where: { email: "nvdatdev@gmail.com" },
+      truncate: true,
     });
   })
 
   let fail_params = {
     "firstName": "Nguyen",
     "lastName": "Dat",
-    "email": "nvdatdev@gmail.com",
+    "email": "nvdatdev1@gmail.com",
     "phone": "0327618979",
     "address": "Da Nang",
     "password": "123123",
@@ -49,7 +36,7 @@ describe('Register & Login user', () => {
   let true_params = {
     "firstName": "Nguyen",
     "lastName": "Dat",
-    "email": "nvdatdev1@gmail.com",
+    "email": "nvdatdev@gmail.com",
     "phone": "0327618979",
     "address": "Da Nang",
     "password": "123123",
