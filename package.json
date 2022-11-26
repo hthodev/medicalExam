@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha ./tests/*",
-    "pretest": "cross-env NODE_ENV=test npm run db:reset",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --seeders-path ./seeders/test",
     "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
     "start": "nodemon --exec npx babel-node src/server.js"
