@@ -31,7 +31,7 @@ exports.createRecordUser = (data) => {
           phone: data.phone,
           image: data.STRING,
           gender: data.gender === "1" ? true : false,
-          roleid: 2,
+          roleid: "R1",
         },
       });
       const token = user[1]

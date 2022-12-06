@@ -29,7 +29,8 @@ exports.createRecordDoctor = (data) => {
           phone: data.phone,
           image: await data.image,
           gender: data.gender === "1" ? true : false,
-          roleid: 1,
+          roleid: "R2",
+          positionid: "R2",
         },
       });
       console.log(user);
@@ -44,6 +45,7 @@ exports.createRecordDoctor = (data) => {
               image: await user.image,
               gender: user.gender,
               roleid: user.roleid,
+              positionid: user.positionid,
             },
             process.env.JWT_SECRET,
             { expiresIn: "30m" }
@@ -76,17 +78,29 @@ exports.getTopRecordDoctor = (limit) => {
       }
       let data = await db.user.findAll({
         limit: parseInt(limit),
+        where: { roleid: "R2" },
         order: [["createdAt", "DESC"]],
         attributes: {
           exclude: ["password"],
         },
+        include: [
+          {
+            model: db.allcodes,
+            as: "positionData",
+            attributes: ["valueENG", "valueVI"],
+          },
+          // {
+          //   model: db.allcodes,
+          //   as: "genderData",
+          //   attributes: ["valueENG, valueVI"],
+          // },
+        ],
+        raw: true,
+        nest: true,
       });
       resolve(data);
     } catch (error) {
-      reject({
-        errCode: -1,
-        message: error,
-      });
+      reject(error);
     }
   });
 };
@@ -95,7 +109,10 @@ exports.getAllDoctor = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let data = db.user.findAll({
-        where: { roleid: 1 },
+        where: { roleid: "R2" },
+        attributes: {
+          exclude: ["password"],
+        },
       });
       resolve(data);
     } catch (error) {
