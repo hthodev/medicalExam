@@ -26,12 +26,14 @@ let initWebRoutes = (app) => {
   //login
   router.post("/login", userController.loginUser);
   //getAllUser
-  router.get("/get-user", userController.getUser);
+  router.get("/get-user", checkLogin, checkAdmin, userController.getUser);
   //DeleteUser
-  router.delete("/remove-account", userController.deleteAccount);
+  router.delete("/remove-account", checkLogin, checkAdmin, userController.deleteAccount);
   //updateUserDoctor
   router.put(
     "/update-account",
+    checkLogin,
+    checkAdmin,
     updateDataValidate,
     userController.updateAccount
   );

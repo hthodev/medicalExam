@@ -3,6 +3,7 @@ const request = require('supertest');
 const { server } = require('../../src/server');
 const { baseurl } = require('../base');
 const db = require('../../src/models/index');
+const jwt = require("jsonwebtoken");
 
 const { expect } = chai;
 
@@ -135,14 +136,57 @@ describe('Get all users', () => {
     });
   })
 
+  var api_token = jwt.sign(
+    {
+      email: 'nvdatdev@gmail.com',
+      firstName: 'Nguyen',
+      lastName: 'Dat',
+      address: 'Da Nang',
+      phone: '0327618979',
+      image: 'abc',
+      gender: true,
+      roleid: 0
+    },
+    process.env.JWT_SECRET
+  )
+
   it('Should get list users successfully', async () => {
     const { body, status } = await request(baseurl)
                                       .get('get-user')
+                                      .set('api-token', api_token)
     expect(body.result.length).equal(4);
     expect(body.result[0].email).equal('nvdatdev1@gmail.com');
     expect(body.result[1].email).equal('nvdatdev2@gmail.com');
     expect(body.result[2].email).equal('nvdatdev3@gmail.com');
     expect(body.result[3].email).equal('nvdatdev4@gmail.com');
+    expect(status).equal(200);
+  })
+
+  it('Should can not delete account', async () => {
+    const { body, status } = await request(baseurl)
+                                      .delete('remove-account')
+                                      .query({ id: 1 })
+    expect(body.message).equal('jwt must be provided');
+    expect(status).equal(500);
+  })
+
+  it('Should delete user account successfully', async () => {
+    const { body, status } = await request(baseurl)
+                                      .delete('remove-account')
+                                      .set('api-token', api_token)
+                                      .query({ id: 1 })
+    expect(body.result.message).equal('Deleting successfully');
+    expect(status).equal(200);
+  })
+
+  it('Should update account', async () => {
+    user = await db.user.findByPk(2)
+    const { body, status } = await request(baseurl)
+                                      .put('update-account')
+                                      .set('api-token', api_token)
+                                      .query({ id: 2 })
+                                      .send({ email: 'nvdat@gmail.com' })
+    expect(body.result.message).equal('Updated successfully');
     expect(status).equal(200);
   })
 })

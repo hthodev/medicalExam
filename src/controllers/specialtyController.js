@@ -4,12 +4,12 @@ const specialtyService = require('../service/specialtyService');
 
 exports.createSpecialty = async (req, res) => {
   await specialtyService.createRecordSpecialty(req.body);
-  return res.send("create successfulty");
+  return res.status(200).send("create successfulty");
 };
 // getAll specialty
 exports.getAllSpecialty = async (req, res) => {
   let data = await specialtyService.getAllRecordSpecialty();
-  return res.send(data);
+  return res.status(200).send(data);
 };
 
 //getById specialty
@@ -18,12 +18,12 @@ exports.getByIdSpecialty = async (req, res) => {
     let id = req.query.id;
     if (id) {
       let massage = await specialtyService.getByIdRecordSpecialty(id);
-      return res.send(massage);
+      return res.status(200).send(massage);
     } else {
-      return res.send("data not found");
+      return res.status(401).send("data not found");
     }
   } catch (error) {
-    console.log(error);
+    return res.status(error.status).send(error.message);
   }
 };
 
@@ -31,7 +31,7 @@ exports.getByIdSpecialty = async (req, res) => {
 exports.updateSpecialty = async (req, res) => {
   let data = req.body;
   await specialtyService.updateRecordSpecialty(data);
-  return res.send("updated");
+  return res.status(200).send("updated");
 };
 
 //delete specialty
@@ -41,9 +41,9 @@ exports.deleteSpecialty = async (req, res) => {
       let id = req.query.id;
       if (id) {
         let massage = await specialtyService.deleteRecordSpecialty(id);
-        return res.send(massage);
+        return res.status(200).send(massage);
       } else {
-        return res.send("data not found!");
+        return res.status(401).send("data not found!");
       }
     } catch (error) {
       reject(error);
