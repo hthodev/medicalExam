@@ -5,12 +5,12 @@ const scheduleService = require('../service/scheduleService');
 
 exports.createSchedule = async (req, res) => {
   await scheduleService.createRecordSchedule(req.body);
-  return res.send("create successfulty");
+  return res.status(200).send("create successfulty");
 };
 // getAll specialty
 exports.getAllSchedule = async (req, res) => {
   let data = await scheduleService.getAllRecordSchedule();
-  return res.send(data);
+  return res.status(200).send(data);
 };
 
 //getById specialty
@@ -19,12 +19,12 @@ exports.getByIdSchedule = async (req, res) => {
     let id = req.query.id;
     if (id) {
       let massage = await scheduleService.getByIdRecordSchedule(id);
-      return res.send(massage);
+      return res.status(200).send(massage);
     } else {
-      return res.send("data not found");
+      return res.status(401).send("data not found");
     }
   } catch (error) {
-    console.log(error);
+    return res.status(error.status).send(error.message);
   }
 };
 
@@ -32,7 +32,7 @@ exports.getByIdSchedule = async (req, res) => {
 exports.updateSchedule = async (req, res) => {
   let data = req.body;
   await scheduleService.updateRecordSchedule(data);
-  return res.send("updated");
+  return res.status(200).send("updated");
 };
 
 //delete specialty
@@ -42,9 +42,9 @@ exports.deleteSchedule = async (req, res) => {
       let id = req.query.id;
       if (id) {
         let massage = await scheduleService.deleteRecordSchedule(id);
-        return res.send(massage);
+        return res.status(200).send(massage);
       } else {
-        return res.send("data not found!");
+        return res.status(401).send("data not found!");
       }
     } catch (error) {
       reject(error);

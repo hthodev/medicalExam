@@ -4,13 +4,13 @@ const doctorClinicSpecialtyService = require('../service/doctorClinicSpecialtySe
 //create DoctorClinicSpecialty
 exports.createDoctorClinicSpecialty = async (req, res) => {
   await doctorClinicSpecialtyService.createRecordDoctorClinicSpecialty(req.body);
-  return res.send("create successfulty");
+  return res.status(200).send("create successfulty");
 };
 
 // getAll specialty
 exports.getAllDoctorClinicSpecialty = async (req, res) => {
   let data = await doctorClinicSpecialtyService.getAllRecordDoctorClinicSpecialty();
-  return res.send(data);
+  return res.status(200).send(data);
 };
 
 //getById specialty
@@ -19,12 +19,12 @@ exports.getByIdDoctorClinicSpecialty = async (req, res) => {
     let id = req.query.id;
     if (id) {
       let massage = await doctorClinicSpecialtyService.getByIdRecordDoctorClinicSpecialty(id);
-      return res.send(massage);
+      return res.status(200).send(massage);
     } else {
-      return res.send("data not found");
+      return res.status(401).send("data not found");
     }
   } catch (error) {
-    console.log(error);
+    return res.status(error.status).send(error.message);
   }
 };
 
@@ -32,7 +32,7 @@ exports.getByIdDoctorClinicSpecialty = async (req, res) => {
 exports.updateDoctorClinicSpecialty = async (req, res) => {
   let data = req.body;
   let result = await doctorClinicSpecialtyService.updateRecordDoctorClinicSpecialty(data);
-  return res.send(result);
+  return res.status(200).send(result);
 };
 
 //delete specialty
@@ -42,9 +42,9 @@ exports.deleteDoctorClinicSpecialty = async (req, res) => {
       let id = req.query.id;
       if (id) {
         let massage = await doctorClinicSpecialtyService.deleteRecordDoctorClinicSpecialty(id);
-        return res.send(massage);
+        return res.status(200).send(massage);
       } else {
-        return res.send("data not found!");
+        return res.status(401).send("data not found!");
       }
     } catch (error) {
       reject(error);
