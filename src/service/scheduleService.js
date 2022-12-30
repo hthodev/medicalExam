@@ -1,18 +1,52 @@
 import db from "../models/index";
+require('dotenv')
+import _ from "lodash";
 
+const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
+ 
+// Booking
 // schedule
 //create schedule
 exports.createRecordSchedule = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      await db.schedules.create({
-        currentNumber: data.currentNumber,
-        maxNumber: data.maxNumber,
-        date: new Date(),
-        timeType: data.timeType,
-        doctorid: data.doctorid,
+      if(!data.arrSchedule || !data.doctorid || !data.formatedDate) {
+        resolve.json({
+          errCode: -1,
+          Message: "Missing require param!"
+        })
+      } else {
+        let schedule = data.arrSchedule;
+        if(schedule && schedule.length > 0 ){
+        schedule = schedule.map(item => {
+          item.maxNumber = MAX_NUMBER_SCHEDULE
+          return item;
+        })
+      }
+
+      let existing = await db.schedules.findAll({
+        where: {
+          doctorid: data.doctorid,
+          date: data.formatedDate  
+        },
+        attributes: ['doctorid', 'date', 'timeType', 'maxNumber'],
+        raw:true
+      })
+      
+
+      let toCreate = _.differenceWith(schedule, existing, (a,b)=> {
+        return a.timeType !== b.timeType && a.date !== b.date;
+      })
+
+      if(toCreate && toCreate.length > 0){
+        await db.schedules.bulkCreate(toCreate)
+      }
+      }
+      
+      resolve({
+        errCode: 0,
+        Massage: "Create successfully!"
       });
-      resolve("create ok");
     } catch (error) {
       reject(error);
     }
@@ -30,6 +64,32 @@ exports.getAllRecordSchedule = () => {
     }
   });
 };
+
+exports.getRecordScheduleByDate = (doctorid, date) => {
+  return new Promise(async(resolve, reject) => {
+    try {
+      let result = await db.schedules.findAll({
+        where: {
+          doctorid: doctorid,
+          date:date
+        },
+        include: [
+          {model: db.allcodes, 
+            as: 'timeTypeData', 
+            attributes: ['valueENG','valueVI']}
+        ],
+        raw: false,
+        nest:true
+      })
+      resolve({
+        errCode: 0,
+        result
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
 
 // getById Schedule
 exports.getByIdRecordSchedule = (dataid) => {

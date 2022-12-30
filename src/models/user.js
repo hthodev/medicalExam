@@ -14,10 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: "keyMap",
         as: "positionData",
       });
+
+      user.hasOne(models.markdown, {foreignKey: 'doctorId'})
       // user.belongsTo(models.allcodes),
       //   {
       //     foreignKey: "gender",
-      //     targetKey: "keyMap",
+      //     targetKey: "keyMap"manager-linux-x64.run,
       //     as: "positionData",
       //   };
     }

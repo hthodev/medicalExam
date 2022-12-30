@@ -1,8 +1,19 @@
 import bookingService from '../service/bookingService';
 
 exports.createBooking = async (req, res) => {
-  await bookingService.createRecordBooking(req.body);
-  return res.send("create successfulty");
+  let data = req.body;
+  if(!data){
+    return res.status(400).json({
+      errCode: -1,
+      message: "Not found data!"
+    })
+  } else {
+    let result = await bookingService.createRecordBooking(req.body);
+    return res.status(200).json({
+      errCode: 0,
+      result
+    })
+  }
 };
 // getAll specialty
 exports.getAllBooking = async (req, res) => {

@@ -1,6 +1,5 @@
 import db from "../models/index";
 
-// Booking
 //create Booking
 exports.createRecordBooking = async (data) => {
   return new Promise(async (resolve, reject) => {
@@ -13,7 +12,7 @@ exports.createRecordBooking = async (data) => {
         timetype: data.timeType,
         createdAt: new Date(),
       });
-      resolve("create ok");
+      resolve("Create Booking Successfully");
     } catch (error) {
       reject(error);
     }

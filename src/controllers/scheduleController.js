@@ -4,9 +4,42 @@ import scheduleService from '../service/scheduleService';
 //create Schedule
 
 exports.createSchedule = async (req, res) => {
-  await scheduleService.createRecordSchedule(req.body);
-  return res.send("create successfulty");
+  let data = req.body
+  if(!data){
+    return res.status(400).json({
+      errCode: -1,
+      Massage: "Not found data!"
+    })
+  } else {
+    let result = await scheduleService.createRecordSchedule(data);
+    return res.status(200).json(result)
+  }
+  
 };
+
+exports.getScheduleByDate = async(req, res) => {
+  let id = req.query.doctorid;
+  let date = req.query.date
+  try {
+    if(id && date) {
+      let result = await scheduleService.getRecordScheduleByDate(id,date)
+      return res.status(200).json(result)
+    } else {
+      return res.status(400).json({
+        errCode: -1,
+        Massage: "Not found data!"
+      })
+    }
+  }
+   catch (error) {
+    return res.status(404).json({
+      errCode:-1,
+      Massage: 'Error from the server'
+    })
+
+  }
+}
+
 // getAll specialty
 exports.getAllSchedule = async (req, res) => {
   let data = await scheduleService.getAllRecordSchedule();

@@ -120,3 +120,76 @@ exports.getAllDoctor = () => {
     }
   });
 };
+
+exports.postRecordInfoDoctor = (inputData) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !inputData.id ||
+        !inputData.contentHTML ||
+        !inputData.contentMarkdown
+      ) {
+        resolve({
+          errCode: -1,
+          message: "Missing input",
+        });
+      } else {
+        await db.markdown.create({
+          contentHTML: inputData.contentHTML,
+          contentMarkdown: inputData.contentMarkdown,
+          introduction: inputData.introduction,
+          doctorId: inputData.id,
+        });
+
+        resolve({
+          errCode: 0,
+          message: "Save Doctor's information successfully!",
+        });
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+exports.getRecordDetailDoctor = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!id) {
+        resolve({
+          errCode: -1,
+          message: "Missing id",
+        });
+      } else {
+        let data = await db.user.findOne({
+          where: { id: id },
+          attributes: {
+            exclude: ["password"],
+          },
+          include: [
+            {
+              model: db.markdown,
+              attributes: { exclude: ["id", "specialtyId", "clinicId"] },
+            },
+            {
+              model: db.allcodes,
+              as: "positionData",
+              attributes: ["valueENG", "valueVI"],
+            },
+
+          ],
+          raw: false,
+          nest: true,
+
+        
+        });
+
+        if(data && data.image) {
+          data.image = new Buffer(data.image, 'base64').toString('binary')        }
+        resolve(data);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

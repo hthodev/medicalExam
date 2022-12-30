@@ -41,7 +41,10 @@ let initWebRoutes = (app) => {
   router.get("/getAll-doctor", doctorController.getAllDoctor);
   //get Top Doctor
   router.get("/getTop-doctor", doctorController.getTopDoctor);
-
+    //post info doctor
+  router.post("/save-info-doctor", doctorController.postInfoDoctor)
+  //get info doctor
+  router.get('/get-detail-doctor', doctorController.getDetailDoctor)
   //allcode
 
   router.get("/getAll-allCode", allCodeController.getAllCode);
@@ -85,10 +88,11 @@ let initWebRoutes = (app) => {
   //Schedule
   router.post(
     "/create-schedule",
-    checkLogin,
-    checkAdmin,
     scheduleController.createSchedule
   );
+  router.get("/get-schedule-by-date",
+  scheduleController.getScheduleByDate)
+  
   //updatescheduleSchedule
   router.post(
     "/update-schedule",

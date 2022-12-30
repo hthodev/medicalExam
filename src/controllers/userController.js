@@ -52,7 +52,6 @@ exports.getUser = async (req, res) => {
   let result = await userService.getRecordUser(id);
   return res.status(200).json({
     errCode: 0,
-    errMessage: "OK",
     result,
   });
 };

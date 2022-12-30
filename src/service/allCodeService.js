@@ -5,7 +5,7 @@ exports.getRecordAllCode = (type) => {
     try {
       if (type) {
         let data = await db.allcodes.findAll({
-          where: { type },
+          where: {type: type}
         });
         resolve(data);
       } else {

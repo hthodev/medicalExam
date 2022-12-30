@@ -30,7 +30,7 @@ exports.createRecordUser = (data) => {
           address: data.address,
           phone: data.phone,
           image: data.STRING,
-          gender: data.gender === "1" ? true : false,
+          gender: data.gender === "R1" ? true : false,
           roleid: "R1",
         },
       });
@@ -84,6 +84,7 @@ exports.LoginRecordUser = (email, password) => {
       const token = isChecked
         ? jwt.sign(
             {
+              id: user.id,
               email: user.email,
               firstName: user.firstName,
               lastName: user.lastName,
@@ -117,11 +118,15 @@ exports.getRecordUser = (userId) => {
     try {
       if (!userId) {
         let data = await db.user.findAll({
+          where:{
+            roleid: "R3"
+          },
           attributes: { exclude: ["password"] },
         });
         resolve(data);
       } else {
         let data = await db.user.findByPk(userId, {
+          where:{roleid:"R3"},
           attributes: { exclude: ["password"] },
         });
         resolve(data);

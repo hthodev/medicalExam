@@ -62,3 +62,42 @@ exports.getTopDoctor = async (req, res) => {
     });
   }
 };
+
+exports.postInfoDoctor = async (req, res) => {
+  try {
+    let result = await doctorService.postRecordInfoDoctor(req.body)
+    return res.status(200).json({
+      errCode: 0,
+      result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      errCode: -1,
+      message: error,
+    });
+  }
+}
+
+exports.getDetailDoctor = async (req, res) => {
+  try {
+    let id = req.query.id
+    if (!id) {
+      return res.status(500).json({
+        errCode: -1,
+        message: "Missing id!",
+      });
+    }
+    else {
+      let data = await doctorService.getRecordDetailDoctor(id)
+      return res.status(200).json({
+        data
+      })
+    }
+  } catch (error) {
+    console.log(error);
+    // return res.status(500).json({
+    //   errCode: -1,
+    //   message: error,
+    // });
+  }
+}
