@@ -34,7 +34,7 @@ let initWebRoutes = (app) => {
     "/update-account",
     checkLogin,
     checkAdmin,
-    updateDataValidate,
+    // updateDataValidate,
     userController.updateAccount
   );
 
@@ -60,7 +60,7 @@ let initWebRoutes = (app) => {
     specialtyController.getAllSpecialty
   );
   //delete
-  router.get(
+  router.delete(
     "/remove-specialty",
     checkLogin,
     checkAdmin,
@@ -96,7 +96,7 @@ let initWebRoutes = (app) => {
     scheduleController.getAllSchedule
   );
   //deletescheduleSchedule
-  router.get(
+  router.delete(
     "/remove-schedule",
     checkLogin,
     checkAdmin,
@@ -125,7 +125,7 @@ let initWebRoutes = (app) => {
     historyController.getAllHistory
   );
   //deleteHistoryHistory
-  router.get(
+  router.delete(
     "/remove-history",
     checkLogin,
     checkAdmin,
@@ -161,7 +161,7 @@ let initWebRoutes = (app) => {
     doctorClinicSpecialtyController.getAllDoctorClinicSpecialty
   );
   //deletedoctor-clinic-specialtydoctor-clinic-specialty
-  router.get(
+  router.delete(
     "/remove-doctor-clinic-specialty",
     checkLogin,
     checkAdmin,
@@ -182,7 +182,7 @@ let initWebRoutes = (app) => {
   //getAllClinicClinic
   router.get("/getAll-clinic", clinicController.getAllClinic);
   //deleteClinicClinic
-  router.get("/remove-clinic", clinicController.deleteClinic);
+  router.delete("/remove-clinic", clinicController.deleteClinic);
   //getByIDClinic
   router.get("/getById-clinic", clinicController.getByIdClinic);
 
@@ -198,7 +198,7 @@ let initWebRoutes = (app) => {
     bookingController.getAllBooking
   );
   //deleteBookingBooking
-  router.get(
+  router.delete(
     "/remove-booking",
     checkLogin,
     checkAdmin,
