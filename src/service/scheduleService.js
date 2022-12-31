@@ -74,9 +74,25 @@ exports.getRecordScheduleByDate = (doctorid, date) => {
           date:date
         },
         include: [
-          {model: db.allcodes, 
+          {
+            model: db.allcodes, 
             as: 'timeTypeData', 
-            attributes: ['valueENG','valueVI']}
+            attributes: ['valueENG','valueVI'],
+          
+          },
+           {
+            model: db.doctorInfo,
+          
+            attributes: {
+              exclude: ['id']
+            },
+            include: [
+              {model: db.allcodes, as:'priceTypeData', attributes:['valueENG', 'valueVI']},
+              {model: db.allcodes, as:'provinceTypeData', attributes:['valueENG', 'valueVI']},
+              {model: db.allcodes, as:'paymentTypeData', attributes:['valueENG', 'valueVI']}
+            ]
+          }
+          
         ],
         raw: false,
         nest:true

@@ -12,6 +12,10 @@ import { checkLogin, checkAdmin } from "../middleware/authorization";
 import { userDataValidate } from "../validation/userValidation";
 import { updateDataValidate } from "../validation/updateValidator";
 import doctorController from "../controllers/doctorController";
+import doctorInfoController from "../controllers/doctorInfoController";
+import patientController from "../controllers/patientController";
+
+
 let router = express.Router();
 
 let initWebRoutes = (app) => {
@@ -42,7 +46,9 @@ let initWebRoutes = (app) => {
   //get Top Doctor
   router.get("/getTop-doctor", doctorController.getTopDoctor);
     //post info doctor
-  router.post("/save-info-doctor", doctorController.postInfoDoctor)
+    router.get("/get-more-info-doctor", doctorInfoController.getMoreInfoDoctor)
+    router.post("/save-more-info-doctor", doctorInfoController.postInfoDoctor)
+    router.post("/save-info-doctor", doctorController.postInfoDoctor)
   //get info doctor
   router.get('/get-detail-doctor', doctorController.getDetailDoctor)
   //allcode
@@ -199,7 +205,7 @@ let initWebRoutes = (app) => {
   router.get("/getById-clinic", clinicController.getByIdClinic);
 
   //Booking
-  router.post("/create-booking", checkLogin, bookingController.createBooking);
+  router.post("/create-booking", bookingController.createBooking);
   //updateBookingBooking
   router.post("/update-booking", checkLogin, bookingController.updateBooking);
   //getAllBookingBooking

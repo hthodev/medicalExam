@@ -32,10 +32,11 @@ exports.getScheduleByDate = async(req, res) => {
     }
   }
    catch (error) {
-    return res.status(404).json({
-      errCode:-1,
-      Massage: 'Error from the server'
-    })
+    // return res.status(404).json({
+    //   errCode:-1,
+    //   Massage: 'Error from the server'
+    // })
+    console.log(error);
 
   }
 }

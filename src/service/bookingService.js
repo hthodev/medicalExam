@@ -1,18 +1,50 @@
 import db from "../models/index";
+import emailService from "./nodemailerService"
 
 //create Booking
 exports.createRecordBooking = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      await db.bookings.create({
-        status: data.status,
-        doctorid: data.doctorid,
-        patientid: data.patientid,
-        date: data.date,
-        timetype: data.timeType,
-        createdAt: new Date(),
-      });
-      resolve("Create Booking Successfully");
+      if(!data.email || !data.doctorid || !data.timeType || !data.date) {
+        resolve({
+          errCode: -1,
+          Message: "Missing parameter!"
+        })
+      } else {
+        // await emailService.sendSimpleEmail({
+        //     reciverEmail: data.email,
+        //     patientName: "BN",
+        //     time:"8:00 - 9:00",
+        //     doctorName:"Tran Thi Thien Thao",
+        //     redirectLink:"https://facebook.com/thientho.it"
+        // })
+
+        let patient = await db.user.findOrCreate({
+          where: {email: data.email},
+          defaults: {
+            email: data.email,
+            roleId: "R3"
+          }
+        })
+
+        if(patient && patient[0]) {
+          await db.bookings.findOrCreate({
+            where: {patientId: patient[0].id},
+            defaults:{
+              status: 'S1',
+              doctorid: data.doctorid,
+              patientId: patient[0].id,
+              date: data.date,
+              timeType: data.timeType
+            }
+          })
+        }
+        resolve({
+          errCode: 0,
+          Message: "Create Booking Successfully"
+        });
+      }
+      
     } catch (error) {
       reject(error);
     }

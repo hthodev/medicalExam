@@ -10,7 +10,6 @@ exports.createBooking = async (req, res) => {
   } else {
     let result = await bookingService.createRecordBooking(req.body);
     return res.status(200).json({
-      errCode: 0,
       result
     })
   }
